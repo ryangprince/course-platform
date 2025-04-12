@@ -34,10 +34,13 @@ def get_public_id_prefix(instance, *args, **kwargs):
     return f"courses/{public_id}"
 
 def get_display_name(instance, *args, **kwargs):
-    title = instance.title
-    if title:
-        return title
-    return "Course Upload"
+    if hasattr(instance, 'get_display_name'):
+        return instance.get_display_name()
+    elif hasattr(instance, 'title'):
+        return instance.title
+    model_class = instance.__class__
+    model_name = model_class.__name__
+    return f"{model_name} Upload"
     
 class Course(models.Model):
     title = models.CharField(max_length=120)
@@ -70,6 +73,9 @@ class Course(models.Model):
             self.public_id = generate_public_id(self)
         super().save(*args, **kwargs)
         # after save
+        
+    def get_display_name(self):
+        return f"{self.title} - Course"
     
     @property
     def is_published(self):

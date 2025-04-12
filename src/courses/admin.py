@@ -5,17 +5,19 @@ from django.utils.html import format_html
 from .models import Course, Lesson
 
 
-class LessonInline(admin.TabularInline):
+class LessonInline(admin.StackedInline):
     model = Lesson
+    readonly_fields = ['updated']
+    extra = 0
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    # inlines = [Lesson]
+    inlines = [LessonInline]
     list_display = ['title', 'status', 'access']
     list_filter = ['status', 'access']
-    fields = ['title', 'description', 'status', 'image', 'access', 'display_image']
-    readonly_fields = ['display_image']
+    fields = ['public_id', 'title', 'description', 'status', 'image', 'access', 'display_image']
+    readonly_fields = ['public_id', 'display_image']
     
     def display_image(self, obj, *args, **kwargs):
         url = obj.image_admin_url

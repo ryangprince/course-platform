@@ -3,7 +3,7 @@ from decouple import config
 # Configuration  
 
 CLOUDINARY_CLOUD_NAME = config("CLOUDINARY_CLOUD_NAME", default="")
-CLOUDINARY_PUBLIC_API_KEY = config("CLOUDINARY_PUBLIC_API_KEY", default="311111347712729")
+CLOUDINARY_PUBLIC_API_KEY = config("CLOUDINARY_PUBLIC_API_KEY", default="")
 CLOUDINARY_SECRET_API_KEY = config("CLOUDINARY_SECRET_API_KEY")
 
 def cloudinary_init():     

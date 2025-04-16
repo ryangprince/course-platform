@@ -124,6 +124,7 @@ class Lesson(models.Model):
         display_name=get_display_name,
         blank=True, 
         null=True, 
+        type="private",
         tags = ['video', 'lesson'],
         resource_type="video"
         )

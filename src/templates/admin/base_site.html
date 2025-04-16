@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+
+
+{% block title%}this - {{ block.super }}{% endblock%}
+
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include "base/js.html" %}
+{% endblock %}
